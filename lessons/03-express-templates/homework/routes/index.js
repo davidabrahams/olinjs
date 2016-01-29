@@ -33,27 +33,58 @@ function catColors()
 	return res;
 }
 
+function sortedCats(cats)
+{
+  return cats.sort(function(a, b) {
+    return a.age > b.age;
+  });
+}
+
+function coloredCats(cats, color)
+{
+  return sortedCats(cats.filter(function (cat) {
+    var b = false;
+    cat.colors.forEach(function(col) {
+      if (col.toUpperCase() === color.toUpperCase()) {
+        b = true;
+      }
+    });
+    return b;
+  }));
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('home');
 });
 
 router.get('/cats/new', function(req, res, next) {
-  var age = Math.floor(Math.random() * 100);
+  var age = Math.floor(Math.random() * 100) + 1;
   var name = randomName();
   var colors = catColors();
-
-  console.log(age);
-  console.log(name);
-  console.log(colors);
-
   var cat = Cat(age, name, colors)
-
   db.add(cat);
-
   res.render('newcat', cat);
 });
 
+router.get('/cats/delete/old', function(req, res, next) {
+  var arr = db.getAll();
+  // this shnazy line of code is from http://stackoverflow.com/questions/11301438/return-index-of-greatest-value-in-an-array
+  var dead = db.remove(arr.reduce(function(iMin,x,i,a) {
+    return x.age > a[iMin].age ? i : iMin;
+  }, 0))[0];
+  res.render('killedcat', dead);
+});
 
+router.get('/cats/bycolor/:color', function(req, res, next) {
+  var color = req.params.color;
+  var filter = coloredCats(db.getAll(), color);
+  res.render('cats', {'cats': filter});
+});
+
+router.get('/cats', function(req, res, next) {
+  var all = sortedCats(db.getAll());
+  res.render('cats', {'cats': all});
+});
 
 module.exports = router;
