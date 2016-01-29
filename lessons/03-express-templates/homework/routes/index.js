@@ -39,15 +39,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/cats/new', function(req, res, next) {
-	var age = Math.floor(Math.random() * 100);
-	var name = randomName();
-	var colors = catColors();
+  var age = Math.floor(Math.random() * 100);
+  var name = randomName();
+  var colors = catColors();
 
-	console.log(age);
-	console.log(name);
-	console.log(colors);
+  console.log(age);
+  console.log(name);
+  console.log(colors);
 
-	db.add(Cat(age, name, colors));
+  var cat = Cat(age, name, colors)
+
+  db.add(cat);
+
+  res.render('newcat', cat);
 });
 
 
