@@ -35,7 +35,7 @@ function catColors()
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('home');
 });
 
 router.get('/cats/new', function(req, res, next) {
@@ -46,6 +46,10 @@ router.get('/cats/new', function(req, res, next) {
 	console.log(age);
 	console.log(name);
 	console.log(colors);
+
+	db.add(Cat(age, name, colors));
 });
+
+
 
 module.exports = router;
