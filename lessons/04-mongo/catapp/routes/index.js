@@ -1,16 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../fakeDatabase');
+var Cat = require('../models/catModel.js');
+var db = require('../fakeDatabase.js');
 
-function Cat(age, name, colors)
-{
-	var cat = {
-		name: name,
-		age: age,
-		colors: colors,
-	}
-	return cat;
-}
+// function Cat(age, name, colors)
+// {
+// 	var cat = {
+// 		name: name,
+// 		age: age,
+// 		colors: colors,
+// 	}
+// 	return cat;
+// }
 
 function randomName()
 {
@@ -59,21 +60,25 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/cats/new', function(req, res, next) {
-  var age = Math.floor(Math.random() * 100) + 1;
-  var name = randomName();
-  var colors = catColors();
-  var cat = Cat(age, name, colors)
-  db.add(cat);
+  var myAge = Math.floor(Math.random() * 100) + 1;
+  var myName = randomName();
+  var myColors = catColors();
+  var cat = new Cat({age: myAge, name: myName, colors: myColors})
+  cat.save(function (err) {
+    if (err) {console.log("Problem saving", err);}
+  });
   res.render('newcat', cat);
 });
 
 router.get('/cats/delete/old', function(req, res, next) {
-  var arr = db.getAll();
-  // this shnazy line of code is from http://stackoverflow.com/questions/11301438/return-index-of-greatest-value-in-an-array
-  var dead = db.remove(arr.reduce(function(iMin,x,i,a) {
-    return x.age > a[iMin].age ? i : iMin;
-  }, 0))[0];
-  res.render('killedcat', dead);
+  var query = Cat.find().sort({age: -1}).limit(1);
+  query.exec(function(err, maxResult){
+    if (err) {return err;}
+    maxResult[0].remove(function(err, result) {
+      if (err) {return err;}
+      res.render('killedcat', maxResult[0]);
+    });
+  });
 });
 
 router.get('/cats/bycolor/:color', function(req, res, next) {
