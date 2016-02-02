@@ -34,26 +34,6 @@ function catColors()
 	return res;
 }
 
-function sortedCats(cats)
-{
-  return cats.sort(function(a, b) {
-    return a.age > b.age;
-  });
-}
-
-function coloredCats(cats, color)
-{
-  return sortedCats(cats.filter(function (cat) {
-    var b = false;
-    cat.colors.forEach(function(col) {
-      if (col.toUpperCase() === color.toUpperCase()) {
-        b = true;
-      }
-    });
-    return b;
-  }));
-}
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -82,14 +62,24 @@ router.get('/cats/delete/old', function(req, res, next) {
 });
 
 router.get('/cats/bycolor/:color', function(req, res, next) {
-  var color = req.params.color;
-  var filter = coloredCats(db.getAll(), color);
-  res.render('cats', {'cats': filter});
+  var myColor = req.params.color;
+  myColor = myColor.toLowerCase();
+  myColor = myColor.charAt(0).toUpperCase() + myColor.slice(1);
+  Cat.find({colors: myColor}).sort({age: 1}).exec(function(err, cats) {
+    res.render('cats', {'cats': cats});
+  });
+});
+
+router.get('/cats/kittens', function(req, res, next) {
+  Cat.find({age: {$lt: 10}}).sort({age: 1}).exec(function(err, cats) {
+    res.render('cats', {'cats': cats});
+  });
 });
 
 router.get('/cats', function(req, res, next) {
-  var all = sortedCats(db.getAll());
-  res.render('cats', {'cats': all});
+  Cat.find().sort({age: 1}).exec(function(err, cats) {
+    res.render('cats', {'cats': cats});
+  });
 });
 
 module.exports = router;
