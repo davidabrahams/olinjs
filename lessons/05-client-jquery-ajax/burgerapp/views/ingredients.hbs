@@ -13,13 +13,17 @@
             <th>Price</th>
             <th></th>
         </tr>
-        <tr>
-            <th>Broccoli</th>
-            <th>$9.41</th>
-            <th>
-                <button type="button">Out of Stock</button>
-            </th>
-        </tr>
+        {{#each ingredients}}
+            <tr>
+                <th>{{name}}</th>
+                <th>{{price}}</th>
+                <th>
+                    <button type="button">Out of Stock</button>
+                </th>
+            </tr>
+
+        {{/each}}
+
     </table>
 
 </body>
