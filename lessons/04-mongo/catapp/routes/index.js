@@ -51,10 +51,18 @@ router.get('/cats/new', function(req, res, next) {
 });
 
 router.get('/cats/delete/old', function(req, res, next) {
+  // Perfect mongoose sorting in action
   var query = Cat.find().sort({age: -1}).limit(1);
   query.exec(function(err, maxResult){
+
     if (err) {return err;}
     maxResult[0].remove(function(err, result) {
+
+    // Handle Errors with helper func
+     // function errorHandler(err, req, res, next) {
+     //   res.status(500);
+     //   res.render('error', { error: err });
+     // }
       if (err) {return err;}
       res.render('killedcat', maxResult[0]);
     });
@@ -70,6 +78,7 @@ router.get('/cats/bycolor/:color', function(req, res, next) {
   });
 });
 
+// Like it like it
 router.get('/cats/kittens', function(req, res, next) {
   Cat.find({age: {$lt: 10}}).sort({age: 1}).exec(function(err, cats) {
     res.render('cats', {'cats': cats});
