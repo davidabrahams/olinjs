@@ -13,6 +13,8 @@ var app = express();
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/cats');
 
+// Just to clarify -- connects to mongoose and handles connection while open or if off throws exception error
+//  Lines 19-22 are not required - Just acts as a verification that db is connected.
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
