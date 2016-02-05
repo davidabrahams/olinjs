@@ -20,11 +20,21 @@
                 <th>
                     <button type="button">Out of Stock</button>
                 </th>
+
+                <th>
+                    <button type="button">Edit</button>
+                </th>
             </tr>
 
         {{/each}}
 
     </table>
+
+    <form id="addForm" action="getIngredients" method="POST">
+        Name: <input type="text" name="name"/><br/>
+        Price: $<input type="number" min="0.00" step="0.01" /> <br/>
+        <input type="submit" value="Add">
+    </form>
 
 </body>
 <script type="text/javascript" src="javascripts/main.js"></script>

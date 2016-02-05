@@ -7,8 +7,15 @@ var Ingredient = Restaurant.ingredient;
 var routes = {};
 
 routes.getIngredientsGET = function(req, res, next) {
-  var ingredients = Ingredient.find({});
-  res.render('ingredients', {'ingredients': ingredients});
+  Ingredient.find({}, function(err, ings){
+    res.render('ingredients', {'ingredients': ings})
+  });
+};
+
+routes.getIngredientsPOST = function(req, res, next) {
+  Ingredient.find({}, function(err, ings){
+    res.render('ingredients', {'ingredients': ings})
+  });
 };
 
 module.exports = routes;
