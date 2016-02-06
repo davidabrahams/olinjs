@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <table border="1">
+    <table id="i_table" border="1">
         <tr>
             <th>Ingredient</th>
             <th>Price</th>
@@ -15,27 +15,27 @@
         </tr>
         {{#each ingredients}}
             <tr>
-                <th>{{name}}</th>
-                <th>{{price}}</th>
-                <th>
-                    <button type="button">Out of Stock</button>
-                </th>
+                <td>{{name}}</td>
+                <td>{{price}}</td>
+                <td>
+                    <button type="button" class="out_of_stock">Out of Stock</button>
+                </td>
 
-                <th>
+                <td>
                     <button type="button">Edit</button>
-                </th>
+                </td>
             </tr>
 
         {{/each}}
 
     </table>
 
-    <form id="addForm" action="getIngredients" method="POST">
+    <form id="add_form" action="postIngredients" method="POST">
         Name: <input type="text" name="name"/><br/>
-        Price: $<input type="number" min="0.00" step="0.01" /> <br/>
+        Price: $<input type="number" name="price" min="0.00" step="0.01" /> <br/>
         <input type="submit" value="Add">
     </form>
 
 </body>
-<script type="text/javascript" src="javascripts/main.js"></script>
+<script type="text/javascript" src="javascripts/ingredients.js"></script>
 </html>

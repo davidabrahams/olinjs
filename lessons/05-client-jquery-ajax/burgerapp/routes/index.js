@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var getIngredient = require('../routes/getIngredients.js');
+var ingredient = require('./ingredientRoutes.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
 //   res.render('ingredients');
 // });
 
-router.get('/ingredients', getIngredient.getIngredientsGET);
+router.get('/ingredients', ingredient.ingredientRoutesGET);
+router.post('/ingredients', ingredient.ingredientRoutesPOST);
 
 module.exports = router;
