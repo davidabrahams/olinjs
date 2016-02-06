@@ -12,5 +12,6 @@ router.get('/', function(req, res, next) {
 
 router.get('/ingredients', ingredient.ingredientRoutesGET);
 router.post('/ingredients', ingredient.ingredientRoutesPOST);
+router.post('/ingredients/delete', ingredient.ingredientRoutesDELETE);
 
 module.exports = router;

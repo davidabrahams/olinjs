@@ -24,4 +24,15 @@ routes.ingredientRoutesPOST = function(req, res) {
   	});
 };
 
+routes.ingredientRoutesDELETE = function(req, res) {
+	var params = req.body;
+	Ingredient.find({_id: params.id}).remove(function(err, result) {
+      if (err) {
+      	console.log("Problem deleting", err);
+      	res.status(500).send("Error!");
+      }
+      else {res.send(params.id)}
+    });
+};
+
 module.exports = routes;

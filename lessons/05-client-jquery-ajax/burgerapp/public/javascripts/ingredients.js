@@ -1,7 +1,7 @@
 var $form = $("#add_form");
 var $table = $("#i_table");
 
-var onSuccess = function(data, status) {
+var onPostSuccess = function(data, status) {
   var table = document.getElementById("i_table");
   var row = table.insertRow(-1);
   var cell1 = row.insertCell(0);
@@ -14,6 +14,10 @@ var onSuccess = function(data, status) {
   cell4.innerHTML = '<button type="button">Edit</button>';
 };
 
+var onDeleteSuccess = function(data, status) {
+  $("#" + data).remove();
+}
+
 var onError = function(data, status) {
 };
 
@@ -25,10 +29,13 @@ $form.submit(function(event) {
     name: name,
     price: price
   })
-  .done(onSuccess)
+  .done(onPostSuccess)
   .error(onError);
 });
 
 $(".out_of_stock").click(function () {
-  $(this).closest("tr").remove();
+  var row = $(this).closest("tr");
+  $.post("ingredients/delete", {id: row.attr('id')})
+  .done(onDeleteSuccess)
+  .error(onError);
 });
