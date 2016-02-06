@@ -33,7 +33,7 @@ var onError = function(data, status) {
 
 var out_of_stock_func = function () {
   var id = $(this).closest("tr").attr('id');
-  $.post("ingredients/delete", id)
+  $.post("ingredients/delete", {id: id})
   .done(onDeleteSuccess)
   .error(onError);
 };

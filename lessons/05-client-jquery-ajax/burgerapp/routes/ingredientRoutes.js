@@ -25,13 +25,13 @@ routes.ingredientRoutesPOST = function(req, res) {
 };
 
 routes.ingredientRoutesDELETE = function(req, res) {
-    var id = req.body;
+    var id = req.body.id;
     Ingredient.find({_id: id}).remove(function(err, result) {
       if (err) {
         console.log("Problem deleting", err);
         res.status(500).send("Error!");
       }
-      else {res.send(params.id);}
+      else {res.send(id);}
     });
 };
 
