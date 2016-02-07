@@ -13,28 +13,7 @@
             <th>Price</th>
         </tr>
         {{#each ingredients}}
-            <tr id={{this._id}}>
-                {{#if in_stock}}
-                    <td>{{name}}</td>
-                    <td>{{price}}</td>
-                    <td>
-                        <button type="button" class="out_of_stock">Out of Stock</button>
-                    </td>
-                    <td>
-                        <button type="button" class="edit_button">Edit</button>
-                    </td>
-                {{else}}
-                    <td><del>{{name}}</del></td>
-                    <td><del>{{price}}</del></td>
-                    <td>
-                        <button type="button" class="in_stock">In Stock</button>
-                    </td>
-                    <td>
-                        <button type="button" class="edit_button">Edit</button>
-                    </td>
-                {{/if}}
-            </tr>
-
+            {{> table_row}}
         {{/each}}
 
     </table>
@@ -56,25 +35,5 @@
 </body>
 
 <script type="text/javascript" src="javascripts/ingredients.js"></script>
-
-<script id="table-row-template" type="text/x-handlebars-template">
-    <tr id={{this._id}}>
-        {{#if in_stock}}
-            <td>{{name}}</td>
-            <td>{{price}}</td>
-            <td>
-                <button type="button" class="out_of_stock">Out of Stock</button>
-        {{else}}
-            <td><del>{{name}}</del></td>
-            <td><del>{{price}}</del></td>
-            <td>
-                <button type="button" class="in_stock">In Stock</button>
-            </td>
-        {{/if}}
-        <td>
-            <button type="button" class="edit_button">Edit</button>
-        </td>
-    </tr>
-</script>
 
 </html>
