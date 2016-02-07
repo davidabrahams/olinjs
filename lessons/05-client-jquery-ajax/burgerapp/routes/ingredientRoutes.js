@@ -3,6 +3,8 @@ var path = require('path');
 var router = express.Router();
 var Restaurant = require('../models/restaurantModel.js');
 var Ingredient = Restaurant.ingredient;
+var hbs = require('hbs');
+var Handlebars = hbs.handlebars;
 
 var routes = {};
 
@@ -21,7 +23,9 @@ routes.ingredientRoutesPOST = function(req, res) {
             console.log("Problem saving", err);
             res.status(500).send("Error!");
         }
-        else {res.send(ing)}
+        else {
+          res.send(ing);
+        }
     });
 };
 

@@ -23,6 +23,7 @@ db.once('open', function() {
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+// console.log(hbs)
 hbs.registerPartials("./views/partials");
 
 // uncomment after placing your favicon in /public

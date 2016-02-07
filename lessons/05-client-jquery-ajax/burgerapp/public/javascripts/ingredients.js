@@ -9,18 +9,16 @@ var updateButtons = function()
 }
 
 var onPostSuccess = function(data, status) {
+
+
+  // var partial = hbs.partials.table_row; // THIS DOESSN'T WORK. hbs.partials IS UNDEFINED
+  // console.log(Handlebars);
+  var html = Handlebars.templates['table_row.hbs'](data); // this works
   var table = document.getElementById("i_table");
   var row = table.insertRow(-1);
-  row.setAttribute("id", data._id);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  var cell4 = row.insertCell(3);
-  cell1.innerHTML = data.name;
-  cell2.innerHTML = data.price;
-  cell3.innerHTML = '<button type="button" class="out_of_stock">Out of Stock</button>';
-  cell4.innerHTML = '<button type="button" class="edit_button">Edit</button>';
+  row.innerHTML = html;
   updateButtons();
+  $add_form.trigger('reset');
 };
 
 var onError = function(data, status) {
