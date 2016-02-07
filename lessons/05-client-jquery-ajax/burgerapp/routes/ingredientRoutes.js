@@ -14,7 +14,8 @@ routes.ingredientRoutesGET = function(req, res) {
 
 routes.ingredientRoutesPOST = function(req, res) {
     var params = req.body;
-    var ing = new Ingredient({name: params.name, price: params.price});
+    var ing = new Ingredient({name: params.name,
+      price: params.price, in_stock: true});
     ing.save(function (err) {
         if (err) {
             console.log("Problem saving", err);
@@ -24,15 +25,18 @@ routes.ingredientRoutesPOST = function(req, res) {
     });
 };
 
-routes.ingredientRoutesDELETE = function(req, res) {
+routes.ingredientRoutesOutOfStock = function(req, res) {
     var id = req.body.id;
-    Ingredient.find({_id: id}).remove(function(err, result) {
-      if (err) {
-        console.log("Problem deleting", err);
-        res.status(500).send("Error!");
-      }
-      else {res.send(id);}
-    });
+    Ingredient.update({ _id: id},
+                      { $set: { in_stock: false }},
+                      function (err, raw) {
+                        if (err) {
+                            res.status(500).send("Error!");
+                        }
+                        else {
+                            res.send(id);
+                        }
+                      });
 };
 
 

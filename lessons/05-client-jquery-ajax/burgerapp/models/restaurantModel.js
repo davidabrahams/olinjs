@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 // Create a Schema
 var ingredientSchema = mongoose.Schema({
   name: String,
-  price: Number
+  price: Number,
+  in_stock: Boolean
 });
 
 module.exports.ingredient = mongoose.model("ingredient", ingredientSchema);

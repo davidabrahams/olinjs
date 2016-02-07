@@ -23,18 +23,16 @@ var onPostSuccess = function(data, status) {
   updateButtons();
 };
 
-var onDeleteSuccess = function(data, status) {
-  $("#" + data).remove();
-}
-
 var onError = function(data, status) {
   window.alert("An error occurred! :(");
 };
 
 var out_of_stock_func = function () {
   var id = $(this).closest("tr").attr('id');
-  $.post("ingredients/delete", {id: id})
-  .done(onDeleteSuccess)
+  $.post("ingredients/outofstock", {id: id})
+  .done(function(data, status) {
+    $("#" + data).remove();
+  })
   .error(onError);
 };
 
@@ -74,6 +72,8 @@ $edit_form.submit(function(event) {
     row = $('#' + id);
     row.find('td').eq(0).text(name);
     row.find('td').eq(1).text(price);
+    $add_form.show();
+    $edit_form.hide();
   })
   .error(onError);
 });

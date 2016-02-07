@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/ingredients', ingredient.ingredientRoutesGET);
 router.post('/ingredients', ingredient.ingredientRoutesPOST);
-router.post('/ingredients/delete', ingredient.ingredientRoutesDELETE);
+router.post('/ingredients/outofstock', ingredient.ingredientRoutesOutOfStock);
 router.post('/ingredients/edit', ingredient.ingredientRoutesEDIT);
 
 module.exports = router;
