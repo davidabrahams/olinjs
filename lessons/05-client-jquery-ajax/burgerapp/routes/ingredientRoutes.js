@@ -8,6 +8,7 @@ var routes = {};
 
 routes.ingredientRoutesGET = function(req, res) {
   Ingredient.find({}, function(err, ings){
+    // hbs.registerPartial("table_row", $("#table-row-template").html());
     res.render('ingredients', {'ingredients': ings})
   });
 };

@@ -4,7 +4,7 @@ var ingredient = require('./ingredientRoutes.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 // router.get('/ingredients', function(req, res, next) {
 //   res.render('ingredients');

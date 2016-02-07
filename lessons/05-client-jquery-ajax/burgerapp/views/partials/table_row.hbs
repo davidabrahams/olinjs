@@ -1,0 +1,17 @@
+<tr id={{this._id}}>
+    {{#if in_stock}}
+        <td>{{name}}</td>
+        <td>{{price}}</td>
+        <td>
+            <button type="button" class="out_of_stock">Out of Stock</button>
+    {{else}}
+        <td><del>{{name}}</del></td>
+        <td><del>{{price}}</del></td>
+        <td>
+            <button type="button" class="in_stock">In Stock</button>
+        </td>
+    {{/if}}
+    <td>
+        <button type="button" class="edit_button">Edit</button>
+    </td>
+</tr>

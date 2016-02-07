@@ -1,6 +1,7 @@
 var $add_form = $("#add_form");
 var $edit_form = $("#edit_form");
 var $table = $("#i_table");
+var hbs = require('hbs');
 
 var updateButtons = function()
 {
@@ -11,6 +12,8 @@ var updateButtons = function()
 var onPostSuccess = function(data, status) {
   var table = document.getElementById("i_table");
   var row = table.insertRow(-1);
+  var partial = hbs.partials['table_row']({data});
+  console.log(partial);
   row.setAttribute("id", data._id);
   var cell1 = row.insertCell(0);
   var cell2 = row.insertCell(1);
@@ -47,6 +50,7 @@ var edit_button_click = function () {
 };
 
 $add_form.submit(function(event) {
+  console.log('submitted');
   event.preventDefault();
   var name = $add_form.find("[name='name']").val();
   var price = $add_form.find("[name='price']").val();
