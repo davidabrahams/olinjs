@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var ingredient = require('./ingredientRoutes.js');
 var order = require('./orderRoutes.js');
+var kitchen = require('./kitchenRoutes.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -18,5 +19,8 @@ router.post('/ingredients/edit', ingredient.ingredientRoutesEDIT);
 
 router.get('/order', order.orderRoutesGET);
 router.post('/order', order.orderRoutesPOST);
+
+router.get('/kitchen', kitchen.kitchenRoutesGET);
+router.post('/kitchen', kitchen.kitchenRoutesDELETE);
 
 module.exports = router;

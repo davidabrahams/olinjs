@@ -15,7 +15,6 @@ var onError = function(data, status) {
 
 var update_stock = function (s, t) {
   var id = t.closest("tr").attr('id');
-  console.log(id);
   $.post("ingredients/outofstock", {id: id, stock:s})
   .done(function(data, status) {
     var row = $("#" + data._id);

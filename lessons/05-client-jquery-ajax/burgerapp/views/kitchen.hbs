@@ -1,0 +1,17 @@
+<table id="k_table">
+    <tr>
+        <th>Order Name</th>
+        <th>Ingredients</th>
+        <th>Price</th>
+    </tr>
+{{#each order}}
+    <tr id={{this._id}}>
+        <td>{{name}}</td>
+        <td>{{ingredients}}</td>
+        <td>{{cost}}</td>
+        <td>
+            <button type="button" class="remove">Remove</button>
+        </td>
+    </tr>
+{{/each}}
+</table>

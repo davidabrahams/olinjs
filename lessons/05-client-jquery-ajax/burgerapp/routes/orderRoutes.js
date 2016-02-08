@@ -15,7 +15,7 @@ routes.orderRoutesGET = function(req, res) {
 routes.orderRoutesPOST = function(req, res) {
   var params = req.body;
   var ord = new Order({name: params.name,
-                      ingredients: params.ingredients,
+                      ingredients: params['ingredients[]'],
                       cost: params.cost});
   ord.save(function (err) {
       if (err) res.status(500).send("Error!");
