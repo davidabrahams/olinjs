@@ -2,22 +2,10 @@ var $add_form = $("#add_form");
 var $edit_form = $("#edit_form");
 var $table = $("#i_table");
 
-var updateButtons = function()
-{
-  $(".out_of_stock").click(out_of_stock_func);
-  $(".edit_button").click(edit_button_click);
-}
 
 var onPostSuccess = function(data, status) {
-
-
-  // var partial = hbs.partials.table_row; // THIS DOESSN'T WORK. hbs.partials IS UNDEFINED
-  // console.log(Handlebars);
-  var html = Handlebars.templates['table_row.hbs'](data); // this works
-  var table = document.getElementById("i_table");
-  var row = table.insertRow(-1);
-  row.innerHTML = html;
-  updateButtons();
+  var html = Handlebars.templates['table_row.hbs'](data);
+  $('#i_table tr:last').after(html);
   $add_form.trigger('reset');
 };
 
@@ -25,11 +13,14 @@ var onError = function(data, status) {
   window.alert("An error occurred! :(");
 };
 
-var out_of_stock_func = function () {
-  var id = $(this).closest("tr").attr('id');
-  $.post("ingredients/outofstock", {id: id})
+var update_stock = function (s, t) {
+  var id = t.closest("tr").attr('id');
+  console.log(id);
+  $.post("ingredients/outofstock", {id: id, stock:s})
   .done(function(data, status) {
-    $("#" + data).remove();
+    var row = $("#" + data._id);
+    var h = Handlebars.templates['table_row.hbs'](data);
+    row.replaceWith(h);
   })
   .error(onError);
 };
@@ -67,9 +58,9 @@ $edit_form.submit(function(event) {
     id: id
   })
   .done(function(data, status) {
-    row = $('#' + id);
-    row.find('td').eq(0).text(name);
-    row.find('td').eq(1).text(price);
+    var row = $("#" + data._id);
+    var h = Handlebars.templates['table_row.hbs'](data);
+    row.replaceWith(h);
     $add_form.show();
     $edit_form.hide();
   })
@@ -82,4 +73,8 @@ $edit_form.on('reset', function(e)
   $edit_form.hide();
 });
 
-updateButtons();
+$("#i_table").on("click", ".out_of_stock", function (event) {update_stock(false,
+  $(this))});
+$("#i_table").on("click", ".in_stock", function (event) {update_stock(true,
+  $(this))});
+$("#i_table").on("click", ".edit_button", edit_button_click);

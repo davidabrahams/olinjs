@@ -30,34 +30,44 @@ routes.ingredientRoutesPOST = function(req, res) {
 };
 
 routes.ingredientRoutesOutOfStock = function(req, res) {
-    var id = req.body.id;
-    Ingredient.update({ _id: id},
-                      { $set: { in_stock: false }},
-                      function (err, raw) {
-                        if (err) {
-                            res.status(500).send("Error!");
-                        }
-                        else {
-                            res.send(id);
-                        }
-                      });
+  var id = req.body.id;
+  var stock = req.body.stock;
+  Ingredient.findById(id, function (err, ing) {
+    if (err) {
+      res.status(500).send("Error!");
+    }
+    else {
+      ing.in_stock = stock;
+      ing.save(function (err) {
+        if (err) {
+          res.status(500).send("Error!");
+        } else {
+          res.send(ing);
+        }
+      });
+    }
+  });
 };
 
 
 routes.ingredientRoutesEDIT = function(req, res) {
     var params = req.body;
-
-    Ingredient.update({ _id: params.id },
-                      { $set: { name: params.name, price: params.price }},
-                      function (err, raw) {
-                        if (err) {
-                            console.log("Problem editing", err);
-                            res.status(500).send("Error!");
-                        }
-                        else {
-                            res.send();
-                        }
-                      });
+    Ingredient.findById(params.id, function (err, ing) {
+    if (err) {
+      res.status(500).send("Error!");
+    }
+    else {
+      ing.name = params.name;
+      ing.price = params.price;
+      ing.save(function (err) {
+        if (err) {
+          res.status(500).send("Error!");
+        } else {
+          res.send(ing);
+        }
+      });
+    }
+  });
 };
 
 

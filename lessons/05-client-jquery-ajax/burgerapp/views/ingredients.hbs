@@ -1,41 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Ingredients</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-</head>
-<body>
+<table id="i_table">
+    <tr>
+        <th>Ingredient</th>
+        <th>Price</th>
+    </tr>
+    {{#each ingredients}}
+        {{> table_row}}
+    {{/each}}
 
-    <table id="i_table">
-        <tr>
-            <th>Ingredient</th>
-            <th>Price</th>
-        </tr>
-        {{#each ingredients}}
-            {{> table_row}}
-        {{/each}}
+</table>
 
-    </table>
+<form id="add_form" action="postIngredients" method="POST">
+    Name: <input type="text" name="name"/><br/>
+    Price: $<input type="number" name="price" min="0.00" step="0.01" /> <br/>
+    <input type="submit" value="Add">
+</form>
 
-    <form id="add_form" action="postIngredients" method="POST">
-        Name: <input type="text" name="name"/><br/>
-        Price: $<input type="number" name="price" min="0.00" step="0.01" /> <br/>
-        <input type="submit" value="Add">
-    </form>
+<form id="edit_form" action="editIngredients" method="POST" hidden>
+    Name: <input type="text" name="name"/><br/>
+    Price: $<input type="number" name="price" min="0.00" step="0.01" /> <br/>
+    <input type="hidden" id="selected"/>
+    <input type="submit" value="Save">
+    <input type="reset" value="Cancel">
+</form>
 
-    <form id="edit_form" action="editIngredients" method="POST" hidden>
-        Name: <input type="text" name="name"/><br/>
-        Price: $<input type="number" name="price" min="0.00" step="0.01" /> <br/>
-        <input type="hidden" id="selected"/>
-        <input type="submit" value="Save">
-        <input type="reset" value="Cancel">
-    </form>
 
-</body>
-
-<script type="text/javascript" src="javascripts/ingredients.js"></script>
-<script src='javascripts/handlebars.js'></script>
-<script src='javascripts/templates/templates.js'></script>
-
-</html>
