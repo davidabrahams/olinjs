@@ -1,0 +1,26 @@
+<form id="order_form" action="order" method="POST">
+
+    <table id="o_table">
+        <tr>
+            <th>&nbsp;</th>
+            <th>Ingredient</th>
+            <th>Price</th>
+        </tr>
+    {{#each ingredients}}
+        <tr id={{this._id}}>
+            {{#if in_stock}}
+                <td><input type="checkbox" name="{{name}}" value="{{price}}"></td>
+                <td>{{name}}</td>
+                <td>{{price}}</td>
+            {{else}}
+                <td><input disabled type="checkbox" name="{{name}}" value="{{price}}"></td>
+                <td><del>poop{{name}}</del></td>
+                <td><del>{{price}}</del></td>
+            {{/if}}
+        </tr>
+    {{/each}}
+    </table>
+    Name: <input type="text" name="name"/>
+    <div id="total_cost">Total Cost: $00</div>
+    <input type="submit" value="Place order">
+</form>

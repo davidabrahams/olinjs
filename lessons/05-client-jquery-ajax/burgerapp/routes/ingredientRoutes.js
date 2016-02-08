@@ -1,6 +1,3 @@
-var express = require('express');
-var path = require('path');
-var router = express.Router();
 var Restaurant = require('../models/restaurantModel.js');
 var Ingredient = Restaurant.ingredient;
 var hbs = require('hbs');
@@ -15,18 +12,18 @@ routes.ingredientRoutesGET = function(req, res) {
 };
 
 routes.ingredientRoutesPOST = function(req, res) {
-    var params = req.body;
-    var ing = new Ingredient({name: params.name,
-      price: params.price, in_stock: true});
-    ing.save(function (err) {
-        if (err) {
-            console.log("Problem saving", err);
-            res.status(500).send("Error!");
-        }
-        else {
-          res.send(ing);
-        }
-    });
+  var params = req.body;
+  var ing = new Ingredient({name: params.name,
+    price: params.price, in_stock: true});
+  ing.save(function (err) {
+      if (err) {
+          console.log("Problem saving", err);
+          res.status(500).send("Error!");
+      }
+      else {
+        res.send(ing);
+      }
+  });
 };
 
 routes.ingredientRoutesOutOfStock = function(req, res) {

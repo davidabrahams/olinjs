@@ -8,4 +8,12 @@ var ingredientSchema = mongoose.Schema({
   in_stock: Boolean
 });
 
+// Create a Schema
+var orderSchema = mongoose.Schema({
+  name: String,
+  ingredients: [String],
+  cost: Number
+});
+
 module.exports.ingredient = mongoose.model("ingredient", ingredientSchema);
+module.exports.order = mongoose.model("order", orderSchema);
