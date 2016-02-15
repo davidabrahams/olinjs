@@ -1,0 +1,16 @@
+<form id="login_form" action="/login/login" method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username" required>
+    <br>
+    <label for="password">Password</label>
+    <input name="password" type="password" id="password" required>
+    <br>
+    <div id="error_message" hidden>
+    	<br>
+    </div>
+<!--     {{#if error}}
+    	{{error}} <br>
+    {{/if}} -->
+    <input type="button" id="create_user" value="Create user">
+    <input type="submit" value="Login">
+</form>
