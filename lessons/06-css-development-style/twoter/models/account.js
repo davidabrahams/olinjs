@@ -1,11 +1,12 @@
-
-var mongoose = require('mongoose');
+var mongoose = require('mongoose')
+  , Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 
 // Create a Schema
 var Account = mongoose.Schema({
   username: String,
-  password: String
+  password: String,
+  twotes : [{ type: Schema.Types.ObjectId, ref: 'Twote' }]
 });
 
 Account.plugin(passportLocalMongoose);
