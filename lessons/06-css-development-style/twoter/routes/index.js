@@ -11,8 +11,8 @@ function loggedIn(req, res, next) {
 
 /* GET home page. */
 router.get('/', function (req, res) {
-  if (req.user || true) {
-    Twote.find({}).populate("_creator").exec(function (err, twotes) {
+  if (req.user) {
+    Twote.find({}).sort([['_id', -1]]).populate("_creator").exec(function (err, twotes) {
       var twote_user = [];
       twotes.forEach(function (twote) {
         user = twote._creator;
@@ -36,11 +36,14 @@ router.post('/twote', function (req, res) {
     t.save(function (err) {
       if (err) return res.status(500).send();
       Account.findByIdAndUpdate(t._creator, {$push: {"twotes": t._id}},
-                                {safe: true, upsert: true}, function(err, model)
-                                { console.log(err); });
+                                {safe: true, upsert: true}, function(err, user)
+                                {
+                                  if (err) return res.status(500).send();
+                                  res.send({twote: t, user: user})
+                                });
     });
   }
-  return res.status(403).send();
+  else {return res.status(403).send();}
 });
 
 router.post('/login', function(req, res, next) {
