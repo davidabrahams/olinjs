@@ -1,15 +1,26 @@
-<form id="twote_form" action="/twote" method="post">
-    <label for="twote_text">Twote</label>
-    <br>
-    <input name="twote_text" id="twote_text" required>
-    <br>
-    <input type="submit" value="Twote">
-    <br>
-    <div id="twote_div">
-        {{#each twote_user}}
-            {{> twot}}
-        {{/each}}
+<div class="container">
 
+    <div class="row">
+        <div class="col-md-8">
+            <form role="form" id="twote_form">
+                <div class="form-group">
+                    <label for="twote_text">Twote:</label>
+                    <input name="twote_text" class="form-control input-lg" id="twote_text" required>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                <!-- <input type="submit" value="Twote"> -->
+            </form>
+
+            <div id="twote_div">
+                {{#each twote_user}}
+                    {{> twot}}
+                {{/each}}
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            Sup
+        </div>
     </div>
 
-</form>
+</div>

@@ -1,8 +1,23 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  background-color: #e9ece5;
+  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+  font: 18px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #3b3a36; }
 
 a {
-  color: #00B7FF;
-}
+  color: #00B7FF; }
+
+div article {
+  margin: 25px 0px;
+  padding: 15px;
+  border-style: solid;
+  border-width: thick;
+  border-radius: 15px; }
+
+div .twote_text {
+  font-size: 24px; }
+
+div .twote_username {
+  text-align: right;
+  font-size: 16px; }
