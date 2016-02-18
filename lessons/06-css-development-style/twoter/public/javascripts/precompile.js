@@ -1,12 +1,12 @@
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['twot.hbs'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+    var stack1, helper, alias1=container.escapeExpression;
 
   return "<article>\n\n<div class=\"twote_text\">"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.twote : depth0)) != null ? stack1.text : stack1), depth0))
+    + alias1(((helper = (helper = helpers.text || (depth0 != null ? depth0.text : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"text","hash":{},"data":data}) : helper)))
     + "</div>\n<br>\n<div class=\"twote_username\">"
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.username : stack1), depth0))
+    + alias1(container.lambda(((stack1 = (depth0 != null ? depth0._creator : depth0)) != null ? stack1.username : stack1), depth0))
     + "</div>\n\n</article>\n";
 },"useData":true});
 })();

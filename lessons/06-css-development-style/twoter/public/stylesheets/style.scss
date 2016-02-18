@@ -1,14 +1,14 @@
 body {
   padding: 50px;
-  background-color: #e9ece5;
+  background-color: #e8edf3;
   /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
   font: 18px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color:#3b3a36;
+  color:#22264b;
 }
 
-a {
+/*a {
   color: #00B7FF;
-}
+}*/
 
 div {
 
@@ -16,8 +16,9 @@ div {
 		margin::25px 0px;
 		padding:15px;
 		border-style:solid;
-		border-width:thick;
+		border-width:thin;
 		border-radius: 15px;
+		background-color: #fff;
 	}
 
 	.twote_text {
@@ -27,10 +28,31 @@ div {
 	.twote_username {
 		text-align: right;
 		font-size: 16px;
+  		font-weight: bolder;
 	}
 }
 
-#login_form {
-	vertical-align: middle;
-  color: #000000;
+#twote_form {
+	margin-bottom: 45px;
+}
+
+.btn-primary {
+	background-color: #22264b;
+}
+
+#checkbox_group {
+margin:25px 0px;
+
+	.checkbox {
+		margin:25px 0px;
+	}
+}
+
+#logged_in_indicator {
+	text-align: right;
+  	font-weight: bolder;
+
+  	#log_out_btn {
+  		margin:0px 10px;
+  	}
 }
