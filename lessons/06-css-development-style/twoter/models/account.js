@@ -9,6 +9,6 @@ var Account = mongoose.Schema({
   twotes : [{ type: Schema.Types.ObjectId, ref: 'Twote' }]
 });
 
-Account.plugin(passportLocalMongoose);
+// Account.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("Account", Account);
