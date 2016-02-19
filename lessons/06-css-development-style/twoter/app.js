@@ -74,13 +74,12 @@ passport.use(new FacebookStrategy({
 
           // set all of the facebook information in our user model
           newUser.facebook.id    = profile.id; // set the users facebook id
-          newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
+          console.log(JSON.stringify(profile));
+          newUser.facebook.name  = profile.displayName;
 
           // save our user to the database
           newUser.save(function(err) {
-              if (err)
-                  throw err;
-
+              if (err) throw err;
               // if successful, return the new user
               return done(null, newUser);
           });

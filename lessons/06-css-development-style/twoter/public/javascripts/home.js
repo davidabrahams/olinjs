@@ -4,7 +4,7 @@ $("#twote_form").submit(function(event) {
   $.post("/twote", {twote_text: text})
     .done(function(response) {
       console.log(response);
-      $("#twote_div").prepend(Handlebars.templates['twot.hbs'](response));
+      $("#twote_div").prepend(Handlebars.templates['twot.hbs'](response.twote));
     })
     .error(function(err) { }
   );
@@ -18,7 +18,6 @@ $("#checkbox_group").on("change", ":checkbox", function (event) {
   .done(function (response) {
     $("#twote_div").empty();
     response.twotes.forEach(function (twote) {
-      console.log({twote});
       $("#twote_div").append(Handlebars.templates['twot.hbs'](twote));
     });
   })

@@ -4,10 +4,8 @@ var passportLocalMongoose = require('passport-local-mongoose');
 
 // Create a Schema
 var Account = mongoose.Schema({
-  local: {
     username: String,
     password: String,
-  },
   facebook         : {
         id           : String,
         name         : String

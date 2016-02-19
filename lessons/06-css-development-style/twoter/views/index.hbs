@@ -15,7 +15,12 @@
         <div class="col-md-4">
             <div id="logged_in_indicator">
                 {{#if user}}
-                    Logged in as {{user.username}}
+                    Logged in as
+                    {{#if user.facebook.id}}
+                        {{user.facebook.name}}
+                    {{else}}
+                        {{user.username}}
+                    {{/if}}
                     <a href="/logout"><button id="log_out_btn" class="btn-primary btn-md">Log out</button></a>
                 {{else}}
                     Not logged in
@@ -36,7 +41,13 @@
             <div id="checkbox_group">
                 {{#each users}}
                     <div class="checkbox">
-                        <label><input type="checkbox" value="" id={{_id}}>{{username}}</label>
+                        <label><input type="checkbox" value="" id={{_id}}>
+                            {{#if facebook.id}}
+                                {{facebook.name}}
+                            {{else}}
+                                {{username}}
+                            {{/if}}
+                        </label>
                     </div>
                 {{/each}}
             </div>

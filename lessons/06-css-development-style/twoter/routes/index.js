@@ -44,7 +44,7 @@ router.post('/twote', function (req, res) {
                                 {safe: true, upsert: true}, function(err, user)
                                 {
                                   if (err) return res.status(500).send();
-                                  res.send({twote: t, user: user})
+                                  res.send({twote: t})
                                 });
       });
     });
