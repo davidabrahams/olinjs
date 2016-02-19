@@ -41,7 +41,7 @@ app.use('/users', users);
 
 // passport config
 var Account = require('./models/account');
-// passport.use(new LocalStrategy(Account.authenticate()));
+passport.use(new LocalStrategy(Account.authenticate()));
 // passport.serializeUser(Account.serializeUser());
 // passport.deserializeUser(Account.deserializeUser());
 
@@ -61,7 +61,32 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
-      return done(null, profile);
+
+      // find the user in the database based on their facebook id
+      Account.findOne({ 'facebook.id' : profile.id }, function(err, user) {
+        if (err)
+            return done(err);
+        if (user) {
+            return done(null, user);
+        } else {
+          // if there is no user found with that facebook id, create them
+          var newUser            = new Account();
+
+          // set all of the facebook information in our user model
+          newUser.facebook.id    = profile.id; // set the users facebook id
+          newUser.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName; // look at the passport user profile to see how names are returned
+
+          // save our user to the database
+          newUser.save(function(err) {
+              if (err)
+                  throw err;
+
+              // if successful, return the new user
+              return done(null, newUser);
+          });
+        }
+
+      });
     });
   }
 ));
