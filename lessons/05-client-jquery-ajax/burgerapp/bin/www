@@ -1,3 +1,4 @@
+/* Are you using this? Or is it left behind from express generate and you use app.js?
 #!/usr/bin/env node
 
 /**

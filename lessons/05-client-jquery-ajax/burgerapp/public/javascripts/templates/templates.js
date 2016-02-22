@@ -1,3 +1,4 @@
+// Fancy fancy clientside handlebars. I'd love to talk to you about this, I've never used it and would be curious what your experience learnign it was like
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['table_row.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {

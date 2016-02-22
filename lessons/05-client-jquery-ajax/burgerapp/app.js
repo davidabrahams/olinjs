@@ -45,7 +45,7 @@ app.use(function(req, res, next) {
 });
 
 // error handlers
-
+// Shouldn't logger do this
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
