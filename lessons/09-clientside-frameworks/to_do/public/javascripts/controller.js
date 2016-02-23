@@ -6,9 +6,18 @@ app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
 
-app.controller('mainController', function ($scope, $http) {
+app.controller('mainController', function ($scope, $filter, $http) {
+
   $scope.formData = {};
-  // when landing on the page, get all todos and show them
+
+  $scope.updateTodo = function(todo) {
+    $http({
+      method: 'POST',
+      url: '/api/todos/edit',
+      data: {todo: todo}
+    }).then(function successCallback(response) {}, function errorCallback(response) {});
+  };
+
   $http.get('/api/todos')
     .success(function(data) {
       $scope.todos = data;

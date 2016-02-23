@@ -34,26 +34,21 @@
                 </div>
 	        </div>
 	        <!-- TODO LIST -->
-	        <div id="todo-list" class="row">
+	        <div id="todo-list" class="row text-center">
+	        <h1>Active Todos</h1>
 	            <div class="col-sm-8 col-sm-offset-2">
 
 	            	<div class="todo_item" ng-repeat="todo in todos">
-	            		<a href="#" editable-text="todo.text">{{ todo.text }}</a>
-	            		<button type="button" class="btn btn-warning">Edit</button>
-	            		<button type="button" class="btn btn-danger">Delete</button>
+	            		<div ng-if="todo.completed == false">
+		            		<a href="#" editable-text="todo.text" onaftersave="updateTodo(todo)">{{ todo.text }}</a>
+		            		<button type="button" class="btn btn-danger" ng-click="deleteTodo(todo._id)">Delete</button>
+	            		</div>
 	            	</div>
-
-	                <!-- LOOP OVER THE TODOS IN $scope.todos -->
-	                <div class="checkbox" ng-repeat="todo in todos">
-	                    <label>
-	                        <input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
-	                    </label>
-	                </div>
 
 	            </div>
 	        </div>
 	    </div>
     </body>
 
-	<script type="text/javascript" src="/javascripts/index.js"></script>
+	<script type="text/javascript" src="/javascripts/controller.js"></script>
 </html>

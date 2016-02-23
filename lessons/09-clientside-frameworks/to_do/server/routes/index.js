@@ -18,14 +18,16 @@ router.get('/api/todos', function(req, res) {
 
 router.post('/api/todos', function(req, res) {
   Todo.create({
-    text : req.body.text
+    text : req.body.text,
+    completed: false
   }, function(err, todo) {
     sendTodos(res, err);
   });
 });
 
 router.post('/api/todos/edit', function(req, res) {
-  console.log(req.params.todo_id);
+  var todo = req.body.todo;
+  Todo.update({ _id: todo._id }, { $set: { text: todo.text }}, function (err, todo) {});
 });
 
 // delete a todo

@@ -3,7 +3,8 @@ var mongoose = require('mongoose')
 
 // Create a Schema
 var Todo = mongoose.Schema({
-    text: String
+    text: String,
+    completed: Boolean
 });
 
 module.exports = mongoose.model("Todo", Todo);
