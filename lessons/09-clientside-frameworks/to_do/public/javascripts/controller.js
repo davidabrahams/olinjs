@@ -6,6 +6,12 @@ app.run(function(editableOptions) {
   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
 
+app.filter('incomplete', function() {
+  return function(input) {
+    if (input.completed == false) return input
+  };
+});
+
 app.controller('mainController', function ($scope, $filter, $http) {
 
   $scope.formData = {};
@@ -59,5 +65,16 @@ app.controller('mainController', function ($scope, $filter, $http) {
       .error(function(data) {
         console.log('Error: ' + data);
       });
+  };
+
+  $scope.completeTodo = function(id, complete) {
+    $http({
+      method: 'POST',
+      url: '/api/todos/complete',
+      data: {id: id, completed: complete}
+    }).then(function successCallback(response) {
+      console.log(response)
+        $scope.todos = response.data;
+      }, function errorCallback(response) {});
   };
 });

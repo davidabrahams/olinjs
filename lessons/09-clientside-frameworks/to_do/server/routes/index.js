@@ -25,6 +25,13 @@ router.post('/api/todos', function(req, res) {
   });
 });
 
+router.post('/api/todos/complete', function(req, res) {
+  completed = req.body.completed;
+  id = req.body.id;
+  Todo.update({ _id: id }, { $set: { completed: completed }}, function (err, todo) {
+    sendTodos(res, err)});
+});
+
 router.post('/api/todos/edit', function(req, res) {
   var todo = req.body.todo;
   Todo.update({ _id: todo._id }, { $set: { text: todo.text }}, function (err, todo) {});

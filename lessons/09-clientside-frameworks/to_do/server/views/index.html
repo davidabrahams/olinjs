@@ -20,7 +20,7 @@
 
 	        <!-- HEADER AND TODO COUNT -->
 	        <div class="jumbotron text-center">
-	            <h1>Todo <span class="label label-info">{{ todos.length }}</span></h1>
+	            <h1>Todo <span class="label label-info">{{ (todos|filter:{completed: false}).length }}</span></h1>
 	        </div>
 	        <!-- FORM TO CREATE TODOS -->
 	        <div id="todo-form" class="row">
@@ -38,15 +38,28 @@
 	        <h1>Active Todos</h1>
 	            <div class="col-sm-8 col-sm-offset-2">
 
-	            	<div class="todo_item" ng-repeat="todo in todos">
+	            	<div ng-repeat="todo in todos">
 	            		<div ng-if="todo.completed == false">
 		            		<a href="#" editable-text="todo.text" onaftersave="updateTodo(todo)">{{ todo.text }}</a>
+		            		<button type="button" class="btn btn-success" ng-click="completeTodo(todo._id, true)">Complete</button>
 		            		<button type="button" class="btn btn-danger" ng-click="deleteTodo(todo._id)">Delete</button>
 	            		</div>
 	            	</div>
-
 	            </div>
 	        </div>
+	        <div id="todo-list" class="row text-center">
+		        <h1>Completed Todos</h1>
+	            <div class="col-sm-8 col-sm-offset-2">
+
+	            	<div ng-repeat="todo in todos">
+	            		<div ng-if="todo.completed == true">
+		            		<a href="#" editable-text="todo.text" onaftersave="updateTodo(todo)">{{ todo.text }}</a>
+		            		<button type="button" class="btn btn-warning" ng-click="completeTodo(todo._id, false)">Active</button>
+		            		<button type="button" class="btn btn-danger" ng-click="deleteTodo(todo._id)">Delete</button>
+	            		</div>
+	            	</div>
+	            </div>
+            </div>
 	    </div>
     </body>
 
