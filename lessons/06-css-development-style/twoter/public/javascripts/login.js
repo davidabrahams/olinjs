@@ -17,6 +17,6 @@ $("#create_user").click(function () {
     .done(function(response) { window.location.href = response.redirect; })
     .error(function(err) { $("#error_message").text(err.responseText);
                            $("#error_message").show();
-                         }
+                         } // different from how you use curly braces in your serverside routes...
     );
 });

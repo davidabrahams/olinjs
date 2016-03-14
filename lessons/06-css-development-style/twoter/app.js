@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('express-session')({
-    secret: 'keyboard cat',
+    secret: 'keyboard cat', // :)
     resave: false,
     saveUninitialized: false
 }));
@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-configure_passport(passport);
+configure_passport(passport); // this is clean!
 
 mongoose.connect('mongodb://localhost/twoter');
 
@@ -80,6 +80,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// app.listen(3000);
+app.listen(3000);
 
 module.exports = app;

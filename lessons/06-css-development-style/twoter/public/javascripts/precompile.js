@@ -1,3 +1,6 @@
+// Some documentation about what this file is and how it works might be nice! Clientside templating, yes?
+// Also, the nested ternary logic, strings of HTML, etc. look kind of scary/difficult to maintain -- did you write them or get them somewhere?
+// If you wrote them, could they be organized any more understandably?
 (function() {
   var template = Handlebars.template, templates = Handlebars.templates = Handlebars.templates || {};
 templates['twot.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {

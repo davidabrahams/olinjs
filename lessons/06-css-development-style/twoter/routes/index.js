@@ -34,22 +34,19 @@ router.post('/twote', function (req, res) {
   if (req.user)
   {
     var tw = new Twote({text: req.body.twote_text, _creator: req.user._id});
-    // t.populate('_creator').exec(function(err, t) {
-
-    // });
     tw.save(function (err, item) {
       Twote.findOne(item).populate('_creator').exec(function (err, t) {
         if (err) return res.status(500).send();
-        Account.findByIdAndUpdate(t._creator._id, {$push: {"twotes": t._id}},
+        Account.findByIdAndUpdate(t._creator._id, {$push: {"twotes": t._id}}, // nice!
                                 {safe: true, upsert: true}, function(err, user)
-                                {
+                                { // I'm not used to the way you arrange your brackets, but I'm ok with it as long as you're consistent (which you mostly are)
                                   if (err) return res.status(500).send();
-                                  res.send({twote: t})
+                                  res.send({twote: t}); // Do you need to wrap the twote in an object? Is it already an object?
                                 });
       });
     });
   }
-  else {return res.status(403).send();}
+  else {return res.status(403).send();} // nice error handling!
 });
 
 router.get('/twote', function (req, res) {
