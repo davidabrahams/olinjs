@@ -13,3 +13,5 @@ describe("A test suite", function() {
 		}, 1000);
 	});
 });
+
+//It would have been cool to do some actual client testing also.
