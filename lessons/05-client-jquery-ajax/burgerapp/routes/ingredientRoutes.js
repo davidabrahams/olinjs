@@ -1,5 +1,6 @@
 var Restaurant = require('../models/restaurantModel.js');
 var Ingredient = Restaurant.ingredient;
+// Do you use either of these
 var hbs = require('hbs');
 var Handlebars = hbs.handlebars;
 
@@ -21,6 +22,7 @@ routes.ingredientRoutesPOST = function(req, res) {
           res.status(500).send("Error!");
       }
       else {
+        // You might consider using res.json instead, it will correctly deal with nulls and undefineds
         res.send(ing);
       }
   });
